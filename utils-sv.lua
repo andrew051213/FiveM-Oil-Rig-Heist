@@ -96,7 +96,7 @@ AddItem = function(source, item, count)
         local ply = QBCore.Functions.GetPlayer(source)
         ply.Functions.AddItem(item, count)
     elseif Settings.Framework == 'vrp' then
-        local player = vRP.getUserSource({playerId})
-        vRP.giveInventoryItem({player, item, count})
+        local user_id = vRP.getUserId({source})
+        vRP.giveInventoryItem({user_id, item, count})
     end
 end
