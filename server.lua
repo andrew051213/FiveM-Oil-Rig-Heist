@@ -1,35 +1,34 @@
 local heist = {}
 
-RegisterServerEvent("JustHeist:startHeist")
-AddEventHandler("JustHeist:startHeist", function()
+RegisterServerEvent("JustHeist:startheist")
+AddEventHandler("JustHeist:startheist", function()
     heist[source] = 1
 end)
 
-RegisterServerEvent("JustHeist:checkIfStarted")
-AddEventHandler("JustHeist:checkIfStarted", function()
-    TriggerClientEvent("JustHeist:loadIfStarted", source, heist)
-        
+RegisterServerEvent("JustHeist:checkifstarted")
+AddEventHandler("JustHeist:checkifstarted", function()
+    TriggerClientEvent("JustHeist:loadifstarted", source, heist)
     TriggerClientEvent("JustHeist:loadPolice", source, CountPolice())
 end)
 
-RegisterServerEvent("JustHeist:stopHeist")
-AddEventHandler("JustHeist:stopHeist", function()
+RegisterServerEvent("JustRigHeist:stopHeist")
+AddEventHandler("JustRigHeist:stopHeist", function()
     heist[source] = nil
 end)
 
-RegisterServerEvent("JustHeist:pdAnnounce")
-AddEventHandler("JustHeist:pdAnnounce", function(typeNotif)
+RegisterServerEvent("JustRigHeist:pdAnnounce")
+AddEventHandler("JustRigHeist:pdAnnounce", function(typeNotif)
     AnnouncePolice(typeNotif)
 end)
 
-RegisterServerEvent("JustHeist:complete")
-AddEventHandler("JustHeist:complete", function()        
+RegisterServerEvent("JustRigHeist:complete")
+AddEventHandler("JustRigHeist:complete", function()        
     if heist[source] ~= 1 then 
         return DropPlayer(source, "Injection Detected #1") 
     end
 
-    heist[source] = nil
-        
+    heist = {}
+
     for i = 1, #Settings.Items do
         AddItem(source, Settings.Items[i].name, Settings.Items[i].count)
     end
